@@ -4,7 +4,7 @@ set -eu
 cd "$(dirname "$0")"
 {
   printf '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-  printf '<meta name="description" content="Find braille display funding, accessible checklists, agency contacts and application workflows in every US state.">\n<meta name="theme-color" content="#0b5d5a">\n<link rel="manifest" href="/manifest.webmanifest">\n<link rel="icon" href="/icons/icon-192.png">\n<link rel="apple-touch-icon" href="/icons/icon-192.png">\n<link rel="stylesheet" href="/app-enhancements.css">\n'
+  printf '<meta name="description" content="Find braille display funding, accessible checklists, agency contacts and application workflows in every US state.">\n<meta name="theme-color" content="#6b2a63">\n<link rel="manifest" href="/manifest.webmanifest">\n<link rel="icon" href="/icons/icon-192.png">\n<link rel="apple-touch-icon" href="/icons/icon-192.png">\n<link rel="stylesheet" href="/app-enhancements.css">\n'
   sed -n '1,/<\/style>/p' src/index.html
   printf '</head>\n<body>\n'
   sed '1,/<\/style>/d' src/index.html

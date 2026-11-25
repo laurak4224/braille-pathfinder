@@ -1,33 +1,32 @@
 <title>Braille Display Pathfinder</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 /* Layout: one calm reading column. Controls first, then the plan as a numbered sequence a screen reader can walk. */
 :root{
-  --bg:#f7f8f6;        /* cool off-white */
+  --bg:#f8f6f7;        /* warm off-white */
   --surface:#ffffff;
-  --fg:#15201e;
-  --muted:#4b5a57;
-  --line:#7b8984;
-  --accent:#0b5d5a;    /* deep teal: 7.5:1 on bg */
+  --fg:#1f1720;
+  --muted:#594d5a;
+  --line:#867a86;
+  --accent:#6b2a63;    /* warm plum purple */
   --accent-fg:#ffffff;
-  --accent-soft:#e1efed;
+  --accent-soft:#f3e5ef;
   --warn-soft:#fff3d6;
   --warn-line:#b3760a;
-  --focus:#c75300;
-  --font:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --focus:#8e3f8a;
+  --font:Verdana,"DejaVu Sans",Arial,sans-serif;
   font-size:112.5%;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#111716;--surface:#1a2221;--fg:#eef3f1;--muted:#aebbb7;--line:#788b84;
-    --accent:#7fd3c9;--accent-fg:#0b1a18;--accent-soft:#163533;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#ffb070;
+    --bg:#171217;--surface:#221b22;--fg:#f4eef3;--muted:#c2b5c1;--line:#8d7e8c;
+    --accent:#e5b2dc;--accent-fg:#211320;--accent-soft:#3b2539;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#f0c6ea;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#111716;--surface:#1a2221;--fg:#eef3f1;--muted:#aebbb7;--line:#788b84;
-  --accent:#7fd3c9;--accent-fg:#0b1a18;--accent-soft:#163533;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#ffb070;
+  --bg:#171217;--surface:#221b22;--fg:#f4eef3;--muted:#c2b5c1;--line:#8d7e8c;
+  --accent:#e5b2dc;--accent-fg:#211320;--accent-soft:#3b2539;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#f0c6ea;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -44,7 +43,10 @@ p,li{max-width:65ch}
 body{margin:0}
 .wrap{overflow-wrap:anywhere}
 button,.btn,select,input{max-width:100%}
-[tabindex="-1"]:focus{outline:3px solid var(--focus);outline-offset:3px}
+[tabindex="-1"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+/* Mouse/touch focus on containers is never outlined; this prevents flashing while pressing. */
+:focus:not(:focus-visible){outline:none}
+#main:focus{outline:none}
 [aria-disabled="true"]{cursor:default}
 .error{font-weight:700;margin:.5rem 0}
 [aria-invalid="true"]{border:3px solid var(--warn-line)}
@@ -52,6 +54,10 @@ p{margin:.75rem 0}
 a{color:var(--accent);text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:.09em}
 a:hover{text-decoration-thickness:.18em}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+/* Fields: no offset outline overlay while editing; a steady purple border remains for keyboard and low-vision users. */
+select:focus,select:focus-visible,input:focus,input:focus-visible{outline:none;border-color:var(--focus);box-shadow:0 0 0 1px var(--focus)}
+.choice input:focus,.choice input:focus-visible{box-shadow:none}
+.choice:has(input:focus-visible){border-color:var(--focus)}
 .skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--accent-fg);padding:.75rem 1rem;z-index:20;font-weight:700}
 .skip:focus{left:16px;top:8px}
 .lede{font-size:1.15rem;color:var(--muted);margin-top:.5rem}
@@ -62,6 +68,9 @@ button.primary{background:var(--accent);color:var(--accent-fg)}
 button:hover{text-decoration:underline}
 .ghost{border-color:var(--line);color:var(--fg)}
 form.controls{background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:1.25rem;margin-top:1.5rem;display:grid;gap:1.25rem}
+/* Explicit form fonts: native controls and option popups may not inherit body typography. */
+form,fieldset,legend,label,button,input,select,option,optgroup,textarea{font-family:var(--font)}
+input,select,textarea,option,optgroup{font-size:inherit;line-height:inherit}
 label,legend{font-weight:700;display:block}
 .hint{font-weight:400;color:var(--muted);font-size:.95rem;display:block;margin-top:.15rem}
 select,input[type=date],input[type=text]{font:inherit;min-height:48px;padding:.5rem .75rem;border:2px solid var(--muted);border-radius:6px;background:var(--surface);color:var(--fg);width:100%;max-width:28rem;margin-top:.4rem}
@@ -114,7 +123,8 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   .toolbar{align-items:stretch}
 }
 @media (forced-colors: active){
-  :focus-visible,[tabindex="-1"]:focus{outline-color:Highlight}
+  :focus-visible,[tabindex="-1"]:focus-visible{outline-color:Highlight}
+  select:focus,input:focus{outline:2px solid Highlight}
   .choice:has(:checked){border-color:Highlight}
 }
 </style>

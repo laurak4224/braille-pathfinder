@@ -2,7 +2,7 @@
 
 // Root hosting only. Bump VERSION whenever any shell asset changes.
 // No skipWaiting: keep an open guide paired with its existing worker/assets.
-const VERSION = 'v1';
+const VERSION = 'v3';
 const CACHE_PREFIX = 'braille-pathfinder-shell-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 const SHELL = '/index.html';
