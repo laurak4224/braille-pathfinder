@@ -23,7 +23,7 @@ try {
   assert.match(await page.locator('#stateName1').textContent(), /California/);
   await page.selectOption('#state','ny');
   assert.equal(await page.locator('#results').isVisible(),false,'changed choices hide previous plan');
-  assert.equal(await page.locator('#status').textContent(),"Choices changed. Select 'Show my plan' to update the results.");
+  assert.equal(await page.locator('#status').textContent(),"Your choices changed. Select 'Show my plan' to see the updated plan.");
   await page.selectOption('#state','ca');
   await page.locator('#go').click();
   assert.match(await page.locator('#state').evaluate(el=>getComputedStyle(el).fontFamily),/Public Sans/);

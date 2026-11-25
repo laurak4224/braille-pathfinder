@@ -138,7 +138,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 <header>
   <p class="eyebrow" style="margin-top:1.5rem">Assistive technology funding, state by state</p>
   <h1>Braille Display Pathfinder</h1>
-  <p class="lede">Choose your state and your situation. You get the agency to call, the exact papers to gather, the steps in order, and the deadlines the law gives the agency.</p>
+  <p class="lede">Find programs that may help you get a braille display. Choose your state and situation for agency contacts, a document checklist, application steps, and information about VR deadlines.</p>
   <div class="toolbar" role="group" aria-label="Text size">
     <button type="button" id="textSmaller" class="ghost">Smaller text</button>
     <button type="button" id="textLarger" class="ghost">Larger text</button>
@@ -147,18 +147,18 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 </header>
 
 <main id="main" tabindex="-1">
-<noscript><p class="notice">This planner needs JavaScript to choose your state and calculate your plan. You can still find your state agency in the <a href="https://rsa.ed.gov/about/states">RSA state directory</a> or ask your local library for help accessing braille funding services.</p></noscript>
+<noscript><p class="notice">Turn on JavaScript to use the planner. You can still find your state agency in the <a href="https://rsa.ed.gov/about/states">RSA state directory</a> or ask your local library for help accessing braille funding services.</p></noscript>
 <p id="storageNote" class="notice" role="status" aria-live="polite" hidden></p>
 <p id="actionStatus" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
 <form class="controls" id="controls" aria-labelledby="controlsHeading" novalidate>
-  <h2 id="controlsHeading" style="border:0;padding:0;margin:0;font-size:1.3rem">Tell us about you</h2>
+  <h2 id="controlsHeading" style="border:0;padding:0;margin:0;font-size:1.3rem">Find programs to contact</h2>
   <div>
     <label for="state">Your state (required)</label>
     <select id="state" name="state" required aria-describedby="stateError"><option value="">Choose a state</option></select>
     <p id="stateError" class="error" hidden></p>
   </div>
   <fieldset>
-    <legend>Pick the one that fits best. It changes which program pays and which papers you need.</legend>
+    <legend>Choose the situation that fits you best. We’ll show relevant programs and documents you may need.</legend>
     <div class="choices" id="situationChoices">
       <label class="choice"><input type="radio" name="situation" value="work" id="sit-work" checked><span>I am working, or I want to work or get job training (age 16 and up)</span></label>
       <label class="choice"><input type="radio" name="situation" value="student" id="sit-student"><span>I am a student in school or college (through age 21)</span></label>
@@ -167,7 +167,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     </div>
   </fieldset>
   <fieldset>
-    <legend>Check any that apply. Each one opens another funding door.</legend>
+    <legend>Check any that apply. You may have other programs to consider.</legend>
     <div class="choices">
       <label class="choice"><input type="checkbox" name="veteran" id="opt-veteran"><span>I am a U.S. military veteran</span></label>
       <label class="choice"><input type="checkbox" name="deafblind" id="opt-deafblind"><span>I also have significant hearing loss</span></label>
@@ -182,7 +182,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 
 <div id="results" hidden role="region" aria-label="Your plan">
   <section aria-labelledby="hPath">
-    <h2 id="hPath" tabindex="-1">Your funding doors, best first</h2>
+    <h2 id="hPath" tabindex="-1">Programs to consider</h2>
     <p id="pathIntro"></p>
     <div class="pathways" id="pathways"></div>
   </section>
@@ -196,8 +196,8 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   </section>
 
   <section aria-labelledby="hDocs">
-    <h2 id="hDocs">Papers to gather</h2>
-    <p>Check each item off as you collect it. Your checks are saved on this device only when browser storage is available. If saving is blocked, they last only while this page stays open. Ask every office for forms in your preferred format: braille, large print, or an accessible electronic file. They are required to provide them under the Americans with Disabilities Act and Section 504.</p>
+    <h2 id="hDocs">Documents to gather</h2>
+    <p>Use this checklist to prepare, and ask each program which documents it needs from you. Your checks are saved on this device if browser storage is available. Otherwise, they last only while this page is open. Ask for forms in the format you use: braille, large print, or an accessible electronic file. The Americans with Disabilities Act and Section 504 require accessible communication.</p>
     <p class="progress" id="docProgress" role="status" aria-live="polite"></p>
     <ul class="docs" id="docList" role="list"></ul>
     <div class="toolbar">
@@ -207,14 +207,14 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   </section>
 
   <section aria-labelledby="hSteps">
-    <h2 id="hSteps">The workflow, step by step</h2>
+    <h2 id="hSteps">How to apply</h2>
     <p id="stepsIntro"></p>
     <div id="stepsArea"></div>
   </section>
 
   <section aria-labelledby="hDeadlines">
     <h2 id="hDeadlines">Deadline tracker</h2>
-    <p>Federal rules give the vocational rehabilitation agency a clock. Enter the date you signed your application and this works out the dates you can hold them to.</p>
+    <p>Enter the date you signed your vocational rehabilitation (VR) application to calculate the 60-day eligibility deadline. The IPE date assumes the eligibility decision is made on day 60; an earlier decision means an earlier IPE deadline. These dates do not apply to the other programs in this guide. Agreed extensions can change them.</p>
     <label for="appDate">Date you signed the VR application</label>
     <input type="date" id="appDate" aria-describedby="dateHint dateError">
     <p id="dateHint" class="hint">Use the date you already signed, not a future date. Clear the field to remove the saved date.</p>
@@ -224,7 +224,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 
   <section aria-labelledby="hScripts">
     <h2 id="hScripts">What to say and write</h2>
-    <p>Copy these and change the words in brackets.</p>
+    <p>Copy the message you need, replace the words in brackets, and remove anything that does not apply to you. The VR messages are for an employment-related application; use the contact details and requirements of the program you are applying to.</p>
     <h3 id="hScript1">Phone script for your first call</h3>
     <pre class="script" id="phoneScript"></pre>
     <div class="toolbar"><button type="button" data-copy="phoneScript">Copy phone script</button></div>
@@ -239,38 +239,38 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
       <div class="toolbar"><button type="button" data-copy="schoolScript">Copy school request</button></div>
     </div>
 
-    <h3 id="hScript4">If the agency says no, or goes silent</h3>
+    <h3 id="hScript4">If VR denies your request or does not respond</h3>
     <pre class="script" id="appealScript"></pre>
     <div class="toolbar"><button type="button" data-copy="appealScript">Copy appeal letter</button></div>
   </section>
 
   <section aria-labelledby="hKnow">
-    <h2 id="hKnow">Rights and facts worth knowing</h2>
+    <h2 id="hKnow">Your rights and other useful information</h2>
     <details><summary>Eligibility for VR does not require legal blindness</summary><div>
-      <p>You qualify for vocational rehabilitation if you have a physical or mental impairment that is a substantial barrier to employment, you can benefit from services, and you need them to get or keep a job. Any visual impairment that gets in the way of work can qualify. Legal blindness (20/200 or worse in the better eye with correction, or a visual field of 20 degrees or less) matters mainly for which unit serves you and for some other programs.</p>
-      <p>If you receive SSI or SSDI you are presumed eligible. The agency only needs to confirm you want to work. This is in 34 CFR 361.42.</p>
+      <p>VR eligibility is based on a physical or mental impairment that is a substantial barrier to employment, whether you can benefit from services, and whether you need them to get or keep a job. A visual impairment that affects your work can qualify. Legal blindness (20/200 or worse in the better eye with correction, or a visual field of 20 degrees or less) matters mainly for which unit serves you and for some other programs.</p>
+      <p>If you receive SSI or SSDI, you are presumed eligible for VR if you intend to work, subject to the provisions in 34 CFR 361.42. This does not mean that a particular device is automatically approved.</p>
     </div></details>
     <details><summary>Deadlines the agency must meet</summary><div>
-      <p>Eligibility must be decided within 60 days of your application unless you agree in writing to more time. Your Individualized Plan for Employment (IPE) must be written within 90 days of the eligibility decision. These are in 34 CFR 361.41 and 361.45.</p>
+      <p>The agency generally must decide eligibility within 60 days of your application. If exceptional, unforeseen circumstances prevent a decision, you and the agency must agree to a specific extension; trial work experiences can also affect this timeline. Your Individualized Plan for Employment (IPE) is due within 90 days of the eligibility decision unless you and the agency agree to a specific extension. See 34 CFR 361.41 and 361.45. Ask for any extension in writing.</p>
     </div></details>
-    <details><summary>Assistive technology skips the "other funding first" search</summary><div>
-      <p>Agencies normally have to look for comparable benefits such as insurance before paying. Federal rules exempt rehabilitation technology, which includes assistive technology devices and services, from that search. This is in 34 CFR 361.53(b). If a counselor tells you to try Medicaid or Medicare first for a braille display, point to this rule.</p>
+    <details><summary>VR does not have to check other funding first for rehabilitation technology</summary><div>
+      <p>VR agencies normally check for comparable benefits, such as insurance, before paying for services. Rehabilitation technology, including assistive technology devices and services, is exempt from that search under 34 CFR 361.53(b). If you are told to try Medicaid or Medicare first for a braille display, ask how this exemption applies to your request.</p>
     </div></details>
-    <details><summary>Financial needs tests and what they can't touch</summary><div>
-      <p>States may ask about your income before paying for some services, including devices. They may not apply a financial test to assessment, counseling, job placement, or to anyone receiving SSI or SSDI. Many states with a separate blind agency have no financial test at all. Ask your counselor directly whether your state applies one to assistive technology.</p>
+    <details><summary>When VR can ask you to contribute to costs</summary><div>
+      <p>States may review your income before paying for some services, including devices. They may not apply a financial needs test to assessment, counseling, job placement, or services for someone receiving SSI or SSDI. Some state blind agencies do not use a financial needs test. Ask your counselor which rules apply to assistive technology in your state.</p>
     </div></details>
     <details><summary>Informed choice: you help pick the device and vendor</summary><div>
-      <p>You have the right to make informed choices about your services and providers, including which braille display meets your goal. The agency may require quotes and may choose the lowest-cost option that meets the need, but the need is defined by your employment goal, not by the cheapest device on the market. Document why cell count, Bluetooth, notetaker functions, or portability matter for your actual work.</p>
+      <p>You have the right to make informed choices about your services and providers, including which braille display meets your goal. The agency may require quotes and may choose the lowest-cost option that meets the need, but the device still needs to meet your employment needs. Explain why cell count, Bluetooth, notetaker functions, or portability matter for your work.</p>
     </div></details>
     <details><summary>Order of selection and waiting lists</summary><div>
-      <p>When funds are short, a state may serve people in priority categories. People who are blind nearly always fall in the highest category ("most significantly disabled"). If you are told there is a waiting list, ask in writing which category you were placed in and why.</p>
+      <p>When a state cannot serve everyone who is eligible, it may use priority categories called an order of selection. People with the most significant disabilities receive priority. Your category depends on the state’s criteria and how your disability affects you, not on blindness alone. If there is a waiting list, ask in writing which category you were placed in and why.</p>
     </div></details>
-    <details><summary>Your free advocate: the Client Assistance Program</summary><div>
+    <details><summary>Free help from the Client Assistance Program</summary><div>
       <p>Every state has a Client Assistance Program (CAP), funded by the federal government and independent of the VR agency. CAP staff explain your rights, help you prepare for meetings, and can represent you in appeals at no cost. Ask the VR agency for the CAP contact; they must give it to you at application and whenever a service is denied.</p>
     </div></details>
-    <details><summary>Typical braille display prices, for planning</summary><div>
+    <details><summary>Braille display prices for planning</summary><div>
       <div class="tablewrap" role="region" aria-label="Braille display price comparison" tabindex="0"><table>
-        <caption class="sr-only">Approximate price ranges by braille display size</caption>
+        <caption class="sr-only">Approximate price ranges by braille display size; confirm current prices with vendors</caption>
         <thead><tr><th scope="col">Device size</th><th scope="col">Typical price range</th><th scope="col">Common uses</th></tr></thead>
         <tbody>
           <tr><td>14 to 20 cells</td><td>$500 to $2,000</td><td>Phone pairing, reading on the go</td></tr>
@@ -279,13 +279,13 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
           <tr><td>80 cells</td><td>$7,000 and up</td><td>Programming, spreadsheets, proofreading</td></tr>
         </tbody>
       </table></div>
-      <p>Agencies usually ask for two or three vendor quotes. State AT programs often lend devices for a few weeks so you can test cell counts before you commit.</p>
+      <p>These are planning estimates, not current vendor quotes. Agencies often ask for two or three quotes. A state assistive technology (AT) program may lend you a device so you can try the cell count and features before choosing one.</p>
     </div></details>
   </section>
 </div>
 
 <footer>
-  <p>This is a guide, not legal advice. Program rules come from the Rehabilitation Act of 1973 as amended (34 CFR Part 361), the Individuals with Disabilities Education Act (34 CFR Part 300), the Assistive Technology Act of 2004, and the federal programs named above. Confirm details with your state agency and your Client Assistance Program.</p>
+  <p>This is a guide, not legal advice. This guide refers to the Rehabilitation Act of 1973 as amended (34 CFR Part 361), the Individuals with Disabilities Education Act (34 CFR Part 300), the Assistive Technology Act of 2004, and the federal programs named in the guide. Confirm current requirements, availability, and deadlines with the program. For help with VR rights or a dispute, contact your Client Assistance Program.</p>
 </footer>
 </div>
 
@@ -356,77 +356,77 @@ const FED = {
 
 // Documents. who: array of pathway keys that need it. tags: extra conditions.
 const DOCS = [
- {id:"app",t:"Completed application form for the agency",w:"Online, paper, or by phone with a counselor. Ask for it in braille, large print or an accessible file.",who:["vr","oib","nls","icc","va","idea"]},
- {id:"eye",t:"Recent eye report from an ophthalmologist or optometrist",w:"Usually within the last 12 months. Must state visual acuity in each eye with best correction, visual field, diagnosis and prognosis. Ask the doctor to add a line about how the impairment affects reading print.",who:["vr","oib","idea","va"]},
- {id:"id",t:"Government photo ID",w:"Driver's license, state ID or passport.",who:["vr","oib","icc","va"]},
+ {id:"app",t:"Completed application form for the agency",w:"Ask how to apply: online, on paper, or by phone with a counselor. Request braille, large print, or an accessible file if needed.",who:["vr","oib","nls","icc","va","idea"]},
+ {id:"eye",t:"Recent eye report from an ophthalmologist or optometrist",w:"Ask how recent the report must be; many programs request one from the last 12 months. Ask your doctor to include best-corrected visual acuity in each eye, visual field, diagnosis, and prognosis, and to explain how your vision affects reading print.",who:["vr","oib","idea","va"]},
+ {id:"id",t:"Government photo ID",w:"Driver's license, state ID, or passport. Ask about alternatives if you do not have photo ID.",who:["vr","oib","icc","va"]},
  {id:"ssn",t:"Social Security number",w:"Card or any official document showing the number. VR agencies report outcomes to the federal government by SSN.",who:["vr","oib"]},
- {id:"work",t:"Proof of U.S. citizenship or authorization to work",w:"Birth certificate, passport, naturalization certificate, permanent resident card or work permit. VR is an employment program, so this is checked.",who:["vr"]},
+ {id:"work",t:"Proof of U.S. citizenship or authorization to work",w:"Examples include a birth certificate, passport, naturalization certificate, permanent resident card, or work permit. Ask the VR agency which documents it accepts for its employment services.",who:["vr"]},
  {id:"res",t:"Proof you live in this state",w:"Utility bill, lease, or a letter from a shelter or agency. Any current document with your name and address.",who:["vr","oib","icc"]},
- {id:"ssa",t:"Social Security award or benefit verification letter",w:"If you receive SSI or SSDI you are presumed eligible for VR and most states skip the financial needs test. Get the letter from your my Social Security account or by calling 1-800-772-1213.",who:["vr","oib","icc"],cond:"ssa"},
+ {id:"ssa",t:"Social Security award or benefit verification letter",w:"If you receive SSI or SSDI and intend to work, you are presumed eligible for VR, subject to the program’s rules. VR may not apply a financial needs test to your services. Get the letter from your my Social Security account or by calling 1-800-772-1213.",who:["vr","oib","icc"],cond:"ssa"},
  {id:"income",t:"Household income information",w:"Recent pay stubs, last year's tax return, or benefit statements. Only needed if your state applies a financial needs test to device purchases, and never if you receive SSI or SSDI.",who:["vr"],cond:"notssa"},
- {id:"ins",t:"Health insurance cards and policy information",w:"Medicaid, Medicare or private plan. The agency records this even though assistive technology is exempt from the comparable benefits search.",who:["vr","oib","va"]},
- {id:"resume",t:"Work history or resume, and education records",w:"Dates and employers, or a school transcript. This feeds your employment goal.",who:["vr"]},
+ {id:"ins",t:"Health insurance cards and policy information",w:"Medicaid, Medicare, or a private plan. The agency records this even though assistive technology is exempt from the comparable benefits search.",who:["vr","oib","va"]},
+ {id:"resume",t:"Work history or resume, and education records",w:"List your employers and dates of work, and bring education records such as a transcript. These help you and your counselor discuss an employment goal.",who:["vr"]},
  {id:"goal",t:"A written statement of your employment goal and why a braille display is needed for it",w:"One page is enough. Name the job or field, the tasks you will do, and what a braille display lets you do that speech alone does not: proofreading, coding, reading quietly in meetings, working with spreadsheets, or reading while deaf-blind.",who:["vr"]},
- {id:"release",t:"Signed release of information",w:"Lets the agency get records from your doctor, school or employer. The agency supplies the form.",who:["vr","oib","idea"]},
+ {id:"release",t:"Signed release of information",w:"Allows the agency to request records from your doctor, school, or employer. Read what you are authorizing before signing. The agency supplies the form.",who:["vr","oib","idea"]},
  {id:"iep",t:"Current IEP or 504 plan and most recent school evaluations",w:"Shows what the school already provides and what transition services are planned.",who:["idea"],sit:"student"},
  {id:"iepreq",t:"Dated copy of your written request to the school for an assistive technology evaluation",w:"Keep a copy. The school's timeline to respond starts when they receive it.",who:["idea"],sit:"student"},
  {id:"age",t:"Proof of age (55 or older)",w:"ID or birth certificate. Needed for the Older Individuals who are Blind program.",who:["oib"],sit:"older"},
  {id:"dd214",t:"DD-214 or other military discharge papers",w:"Needed to enroll in VA health care if you are not already enrolled. If you are enrolled, bring your VA health ID card.",who:["va"],cond:"veteran"},
  {id:"audio",t:"Audiogram or hearing report",w:"iCanConnect requires evidence of hearing loss in addition to vision loss. A professional can sign the disability attestation on the application.",who:["icc"],cond:"deafblind"},
- {id:"attest",t:"iCanConnect disability attestation signed by a professional",w:"Doctors, audiologists, VR counselors, teachers of the deaf-blind and other listed professionals may sign. The form is part of the application.",who:["icc"],cond:"deafblind"},
+ {id:"attest",t:"iCanConnect disability attestation signed by a professional",w:"Doctors, audiologists, VR counselors, teachers of the deaf-blind, and other professionals listed on the application may sign. The form is part of the application.",who:["icc"],cond:"deafblind"},
  {id:"iccincome",t:"Income verification for iCanConnect",w:"Household income must be at or below 400 percent of the federal poverty guidelines. A tax return, SSA benefit letter, or proof you are in a means-tested program such as SNAP or Medicaid works.",who:["icc"],cond:"deafblind"},
  {id:"nlscert",t:"NLS application certified by a competent authority",w:"For blindness or visual impairment, a doctor of medicine or osteopathy, optometrist, registered nurse, therapist, or professional staff of a hospital, agency, or library can sign. Say on the form that you read braille so your library knows you are eligible for a braille eReader.",who:["nls"]},
- {id:"quotes",t:"Vendor quotes for the device you want (the counselor often gets these)",w:"Two or three quotes from vendors such as HumanWare, HIMS, Freedom Scientific (Vispero), APH, Orbit Research or Dot. Include the cell count and accessories you need. Keep a copy.",who:["vr","oib"]},
+ {id:"quotes",t:"Vendor quotes for the device you want (the counselor often gets these)",w:"Two or three quotes from vendors such as HumanWare, HIMS, Freedom Scientific (Vispero), APH, Orbit Research, or Dot. Include the cell count and accessories you need. Keep a copy.",who:["vr","oib"]},
  {id:"ateval",t:"Assistive technology assessment report",w:"The agency arranges this with its own staff or a contracted specialist. You can bring notes on devices you have tried and what worked.",who:["vr","oib","idea"]}
 ];
 
 const PATHWAYS = {
- vr:{name:"State vocational rehabilitation",tag:"Buys the device",blurb:"Your state VR agency can buy a braille display outright when it is needed for your employment goal, including school as a step to a job. This is the main route for working-age adults and students 14 and up.",
+ vr:{name:"State vocational rehabilitation",tag:"May fund a device",blurb:"Your state VR agency may buy a braille display if it is needed for an agreed employment goal. That can include education or training toward a job. Working-age adults and students can ask about VR; student services and starting ages vary by state.",
   steps:(s)=>[
    {when:"Day 0",t:"Call or visit the agency and ask for an intake appointment.",d:`Say you are blind or visually impaired and want to apply for vocational rehabilitation services. Ask which documents to bring and ask for all forms in your preferred accessible format. ${s.kind==="blind"?"Your state has a separate agency for blind people, so ask for a VR counselor there.":"Your state serves blind people through its general VR agency. Ask to be assigned to a counselor who specializes in blindness or visual impairment."}`},
-   {when:"Week 1 to 2",t:"Attend intake or orientation and sign the application.",d:"Some states require a group orientation before you can apply. Sign and date the application and keep a copy. The 60-day eligibility clock starts on this date. Ask for the Client Assistance Program contact; they must give it to you."},
-   {when:"Week 1 to 4",t:"Get your eye report to the counselor.",d:"Ask your eye doctor's office to send it directly, and get your own copy too. Agencies will pay for an eye exam if you do not have a recent report, so ask rather than pay."},
-   {when:"By day 60",t:"Receive the written eligibility decision.",d:"If you receive SSI or SSDI you are presumed eligible. If the state is on an order of selection, ask in writing which priority category you were placed in. If the agency needs more time it must ask you to agree in writing."},
+   {when:"Week 1 to 2",t:"Attend intake or orientation and sign the application.",d:"Some states require a group orientation before you can apply. Sign and date the application and keep a copy. The 60-day eligibility period starts on this date. Ask for the Client Assistance Program contact; they must give it to you."},
+   {when:"Week 1 to 4",t:"Get your eye report to the counselor.",d:"Ask your eye doctor's office to send it directly, and get your own copy too. If you need a new eye exam for eligibility, ask the agency to arrange and pay for it before paying yourself."},
+   {when:"By day 60",t:"Receive the written eligibility decision.",d:"If you receive SSI or SSDI and intend to work, you are presumed eligible, subject to VR rules. If the state is on an order of selection, ask in writing which priority category you were placed in. If more time is needed, ask for the reason and any proposed extension in writing. Trial work experiences can also affect this deadline."},
    {when:"Day 60 to 150",t:"Complete the comprehensive assessment, including an assistive technology evaluation.",d:"Tell the evaluator exactly what tasks you need to do. Say which cell count, connections, and portability you need and why. Ask to try devices through your state AT program's loan library first if you are unsure."},
-   {when:"By day 150",t:"Write your Individualized Plan for Employment (IPE) together with your counselor.",d:"The IPE must be written within 90 days of eligibility. The braille display goes in the IPE as rehabilitation technology tied to your goal. You may write the plan yourself, with the counselor, or with the Client Assistance Program's help. Do not sign a plan that leaves the device out."},
-   {when:"After the IPE",t:"Approval, quotes, and purchase order.",d:"The counselor gathers vendor quotes and may need a supervisor to approve the amount. Ask for the expected ship date. Delivery typically takes 2 to 8 weeks after the purchase order."},
-   {when:"On delivery",t:"Training, and keep the paperwork.",d:"Ask for training hours in the IPE. Keep your copy of the IPE, the purchase order, and the warranty. Some states keep title to the device until your case is closed; ask what happens if it breaks."}
+   {when:"By day 150",t:"Write your Individualized Plan for Employment (IPE) together with your counselor.",d:"The IPE is due within 90 days of eligibility unless you and the agency agree to a specific extension. The braille display goes in the IPE as rehabilitation technology tied to your goal. You may write the plan yourself, with the counselor, or with the Client Assistance Program's help. Before signing, check that the plan includes the device and training you agreed on. If it does not, ask for changes or contact CAP."},
+   {when:"After the IPE",t:"Approval, quotes, and purchase order.",d:"The counselor gathers vendor quotes and may need a supervisor to approve the amount. Ask for the expected ship date. Allow an estimated 2 to 8 weeks after the purchase order, but confirm the timing with the vendor."},
+   {when:"On delivery",t:"Arrange training and keep your paperwork.",d:"Ask for training hours in the IPE. Keep your copy of the IPE, the purchase order, and the warranty. Some states keep title to the device until your case is closed; ask what happens if it breaks."}
   ]},
- oib:{name:"Older Individuals who are Blind program (age 55 and up)",tag:"May buy or lend",blurb:"Every state blind services agency runs an independent living program for people 55 and older who are not seeking employment. It can provide training and assistive technology, including braille displays, though budgets are smaller than VR and some states lend rather than give.",
+ oib:{name:"Older Individuals who are Blind program (age 55 and up)",tag:"May buy or lend",blurb:"The Older Individuals who are Blind program supports independent living for people age 55 and older. Ask your state blind services agency about training and assistive technology, including braille displays. Equipment, budgets, and eligibility requirements vary; a program may lend a device rather than provide one to keep.",
   steps:(s)=>[
    {when:"Day 0",t:"Call the agency and ask for the Older Blind or Independent Living program.",d:"Say you are 55 or older, blind or losing vision, and want help living independently. Ask for an intake visit, which is often done at your home."},
-   {when:"Week 1 to 3",t:"Complete the application and provide your eye report and proof of age.",d:"There is usually no financial needs test, but some states ask income to set a sliding fee for devices. Ask up front."},
-   {when:"Week 2 to 6",t:"Independent living assessment.",d:"A teacher or counselor looks at your daily goals: reading mail, managing medication, using a phone or computer. Say clearly that you read braille and that a braille display would let you read privately and accurately."},
+   {when:"Week 1 to 3",t:"Complete the application and provide your eye report and proof of age.",d:"Ask whether the program reviews income or charges a sliding fee for devices. Requirements vary by state."},
+   {when:"Week 2 to 6",t:"Independent living assessment.",d:"A teacher or counselor looks at your daily goals: reading mail, managing medication, and using a phone or computer. Say clearly that you read braille and that a braille display would let you read privately and accurately."},
    {when:"Week 4 to 12",t:"Service plan and device.",d:"The plan lists training and equipment. If the program cannot fund a braille display, ask to be referred to VR (if you would consider any work, including part-time), to the state AT program's loan or reuse program, or to the NLS braille eReader program."}
   ]},
- idea:{name:"School district under IDEA (through age 21)",tag:"School provides",blurb:"Public schools must consider assistive technology in every IEP and must provide it at no cost if a student needs it to benefit from their education. A braille display can be written into the IEP and can go home if the IEP says so.",
+ idea:{name:"School district under IDEA (through age 21)",tag:"Through an IEP",blurb:"For eligible public school students, the IEP team must consider assistive technology and provide it at no cost when it is needed for a free appropriate public education. A braille display, training, and necessary home use can be included in the IEP. IDEA applies through age 21, subject to state rules; it does not cover college. College students should contact their disability services office and VR.",
   steps:(s)=>[
    {when:"Day 0",t:"Send a written request for an assistive technology evaluation to the IEP team chair or special education director.",d:"Email counts. Date it, keep a copy, and ask for a written response. Federal law requires the IEP team to consider AT (34 CFR 300.324), and most states set a timeline for responding to evaluation requests."},
    {when:"Within the state's evaluation timeline",t:"AT evaluation by the district or a contracted specialist.",d:"Ask that a teacher of students with visual impairments and an AT specialist who knows braille devices take part. Bring examples of work that is slow or inaccessible with speech alone."},
    {when:"Next IEP meeting",t:"Write the device, training, and home use into the IEP.",d:"The IEP should name the device type and features, who trains the student and staff, and that the device goes home for homework (34 CFR 300.105). If the team declines, ask for prior written notice explaining why."},
    {when:"Age 14 to 16",t:"Open a VR case for transition.",d:"Students may receive Pre-Employment Transition Services from the state VR agency while still in school. VR can buy a device the student keeps after graduation, since school-purchased devices usually stay with the district. Start this two years before leaving school."}
   ]},
- va:{name:"VA Blind Rehabilitation Service",tag:"Provides the device",blurb:"Veterans enrolled in VA health care can receive braille displays and other devices through VA Blind Rehabilitation and Prosthetics. The vision loss does not have to be service-connected.",
+ va:{name:"VA Blind Rehabilitation Service",tag:"Assessment and equipment",blurb:"Veterans enrolled in VA health care can ask VA Blind Rehabilitation and Prosthetics about braille displays and other devices. An assessment and prescription determine what is provided. The vision loss does not have to be service-connected.",
   steps:(s)=>[
    {when:"Day 0",t:"Enroll in VA health care if you have not.",d:"Apply online at va.gov, by phone at 1-877-222-8387, or at a VA medical center with your DD-214."},
    {when:"Week 1 to 4",t:"Ask for a referral to the VIST coordinator.",d:"Every VA medical center has a Visual Impairment Services Team (VIST) coordinator. Your primary care provider or the eye clinic can refer you, or you can call the center and ask for VIST directly."},
    {when:"Week 2 to 8",t:"VIST assessment and eye exam.",d:"The coordinator reviews your vision, goals, and daily needs and can refer you to a Blind Rehabilitation Outpatient Specialist or an inpatient Blind Rehabilitation Center."},
    {when:"After assessment",t:"Device prescription and training.",d:"Devices are issued through the Prosthetic and Sensory Aids Service after a clinician prescribes them. Training comes with the device. Repairs and replacements go through the same office."}
   ]},
- icc:{name:"iCanConnect",tag:"Free equipment",blurb:"The federal National Deaf-Blind Equipment Distribution Program gives braille displays, phones, computers, and training free to people with combined hearing and vision loss whose household income is at or below 400 percent of the federal poverty guidelines.",
+ icc:{name:"iCanConnect",tag:"Equipment and training at no cost",blurb:"The federal National Deaf-Blind Equipment Distribution Program provides communications equipment and training at no cost to people who meet its combined hearing and vision loss requirements and whose household income is at or below 400 percent of the federal poverty guidelines. Equipment may include braille displays, phones, and computers; the program assesses what each person needs.",
   steps:(s)=>[
    {when:"Day 0",t:"Find your state's iCanConnect program.",d:"Go to icanconnect.org or call 1-800-825-4595. Each state has one certified program that runs it."},
    {when:"Week 1 to 3",t:"Complete the application with disability attestation and income verification.",d:"A professional signs that you have both vision and hearing loss. Attach income proof or proof you are in a means-tested program."},
-   {when:"Week 3 to 8",t:"Assessment by a deaf-blind technology specialist.",d:"They match equipment to how you communicate and read. Ask about a braille display paired with a phone, since that is the most common iCanConnect setup."},
-   {when:"After assessment",t:"Equipment and training at home.",d:"Equipment is yours to keep. Training continues until you can use it independently."}
+   {when:"Week 3 to 8",t:"Assessment by a deaf-blind technology specialist.",d:"They match equipment to how you communicate and read. Ask about a braille display paired with a phone, if that would meet your communication needs."},
+   {when:"After assessment",t:"Equipment and training at home.",d:"Ask the program about equipment ownership, repairs, and the training available to help you use it independently."}
   ]},
- nls:{name:"NLS braille eReader on loan",tag:"Free, fastest",blurb:"The National Library Service for the Blind and Print Disabled, part of the Library of Congress, lends refreshable braille eReaders at no cost to patrons who read braille. It is the quickest way to get a braille display in your hands, and it does not stop you from also applying elsewhere.",
+ nls:{name:"NLS braille eReader on loan",tag:"Loan at no cost",blurb:"The National Library Service for the Blind and Print Disabled, part of the Library of Congress, lends refreshable braille eReaders at no cost to eligible patrons who read braille. Ask your network library about availability and waiting lists. You can ask about this loan while applying to other programs.",
   steps:(s)=>[
    {when:"Day 0",t:"Apply to your NLS network library.",d:"Find your state's library at loc.gov/nls (choose Find your library) or call 1-888-657-7323. The application needs a signature from a competent authority such as your eye doctor, nurse, or a professional at a hospital, agency, or library."},
    {when:"Week 1 to 3",t:"Once enrolled, ask for a braille eReader.",d:"Tell the library you read braille and want to borrow a braille eReader. Availability varies by state; some have waiting lists."},
    {when:"On arrival",t:"Set it up with BARD.",d:"The eReader downloads braille books and magazines from BARD and can also connect to a phone or computer for everyday reading."}
   ]},
- at:{name:"State Assistive Technology Act program",tag:"Try before you buy",blurb:"Every state has a federally funded AT program that lends devices for a few weeks, runs demonstrations, resells or gives away used equipment, and in many states offers low-interest loans to buy devices. Use it to test cell counts before an agency buys, or to borrow while you wait.",
+ at:{name:"State Assistive Technology Act program",tag:"Try before you buy",blurb:"Every state has a federally funded assistive technology program. Ask about device demonstrations, short-term loans, used equipment, and financing. Services and braille display availability vary. A loan can help you try a device before an agency buys it or while you wait for funding.",
   steps:(s)=>[
    {when:"Any time",t:"Contact the program and ask for a device demonstration or short-term loan.",d:"Ask which braille displays are in the loan library. Loans are usually free for 2 to 6 weeks."},
    {when:"Any time",t:"Ask about the reuse and financing programs.",d:"Reuse programs sometimes have donated braille displays. Alternative financing programs offer loans with low interest and flexible credit rules."}
@@ -441,7 +441,7 @@ const sessionValues = new Map();
 function storageWarning(){
   const note=$("storageNote");
   note.hidden=false;
-  note.textContent="Browser storage is unavailable or contains damaged data. Your plan still works, but changes may not survive closing or reloading this page.";
+  note.textContent="This browser cannot save your changes, or some saved data could not be read. You can still use the plan. Your changes may be lost when you close or reload the page.";
 }
 function store(k,v){
   sessionValues.set(k,v);
@@ -482,7 +482,7 @@ async function copyText(text,btn){
     try{ta.focus({preventScroll:true});ta.select();copied=document.execCommand("copy")===true}catch(e){}
     finally{ta.remove();if(previous&&previous.isConnected)previous.focus({preventScroll:true})}
   }
-  announce(copied ? btn.textContent.replace(/^Copy /,"Copied ")+" to clipboard." : "Copy failed. Select the script or checklist text and copy it yourself.");
+  announce(copied ? btn.textContent.replace(/^Copy /,"Copied ")+" to clipboard." : "The text could not be copied. Select the script or checklist text, then use your device’s copy command.");
 }
 
 // ----- Text size -----
@@ -533,19 +533,19 @@ function render(f){
   $("stateName1").textContent=s.n;
   const order=pathwayOrder(f);
   const sitWords={work:"working or looking for work",student:"a student",older:"55 or older and not seeking work",reading:"reading at home"}[f.sit];
-  $("pathIntro").textContent=`For someone in ${s.n} who is ${sitWords}${f.veteran?", a veteran":""}${f.deafblind?", with combined hearing and vision loss":""}${f.ssa?", receiving SSI or SSDI":""}, these programs can put a braille display in your hands. Apply to more than one; they do not cancel each other out.`;
+  $("pathIntro").textContent=`Based on your choices for ${s.n} (${sitWords}${f.veteran?"; veteran":""}${f.deafblind?"; combined hearing and vision loss":""}${f.ssa?"; receives SSI or SSDI":""}), here are programs to ask about. Each has its own requirements and may not fund a device in every case. You can contact more than one; tell each program about any help you already receive so they can coordinate.`;
 
   $("pathways").innerHTML=order.map((k,i)=>{const p=PATHWAYS[k];
     let extra="";
     if(k==="oib"&&f.sit==="reading") extra=" This applies only if you are 55 or older.";
     if(k==="vr"&&f.sit==="reading") extra=" This applies if you would consider any work, including part-time or self-employment.";
-    if(k==="vr"&&f.ssa) extra+=" Because you receive SSI or SSDI, you are presumed eligible and most states will not apply a financial needs test.";
+    if(k==="vr"&&f.ssa) extra+=" Because you receive SSI or SSDI, you are presumed eligible for VR if you intend to work, subject to VR rules. VR may not apply a financial needs test to your services.";
     return `<article class="pathway${i===0?" best":""}" aria-labelledby="pw-${k}"><h3 id="pw-${k}">${i===0?"Start here: ":""}${esc(p.name)}</h3><p class="tagline"><span class="sr-only">What it offers: </span><span class="tag">${esc(p.tag)}</span></p><p>${esc(p.blurb)}${esc(extra)}</p></article>`}).join("");
 
   // Agency cards
-  const kindText=s.kind==="blind"?"Separate state agency for people who are blind. It handles vocational rehabilitation, the Older Blind program, and usually independent living training in one place.":`General vocational rehabilitation agency${s.unit?", with a unit for blind and visually impaired people: "+esc(s.unit)+".":"."} Ask for a counselor who specializes in blindness.`;
+  const kindText=s.kind==="blind"?"This state has a separate agency for people who are blind. Ask about vocational rehabilitation, the Older Blind program, and independent living training.":`General vocational rehabilitation agency${s.unit?", with a unit for blind and visually impaired people: "+esc(s.unit)+".":"."} Ask for a counselor who specializes in blindness.`;
   let cards=`<div class="card key"><p class="eyebrow">Vocational rehabilitation and Older Blind program</p><h3 style="margin-top:.25rem">${esc(s.agency)}</h3><p>${esc(s.dept)}</p><p>${kindText}</p><dl class="facts"><dt>Website</dt><dd><a href="${esc(s.url)}" rel="noopener">${esc(s.url.replace(/^https?:\/\/(www\.)?/,""))}</a></dd>${s.phone?`<dt>Main phone</dt><dd>${esc(s.phone)} <span class="hint" style="display:inline">(confirm on the website)</span></dd>`:`<dt>Phone</dt><dd>Find the current number on the website or in the <a href="${FED.rsa.url}" rel="noopener">RSA state directory</a>.</dd>`}<dt>Also ask for</dt><dd>The Client Assistance Program (CAP) contact for ${esc(s.n)}, and the nearest NLS network library.</dd></dl></div>`;
-  cards+=`<div class="card"><p class="eyebrow">Assistive technology program (loans, demos, reuse, financing)</p><h3 style="margin-top:.25rem">${esc(s.at)}</h3><dl class="facts"><dt>Website</dt><dd>${s.atUrl?`<a href="${esc(s.atUrl)}" rel="noopener">${esc(s.atUrl.replace(/^https?:\/\/(www\.)?/,""))}</a>`:`Listed under State AT Programs at <a href="${FED.at3.url}" rel="noopener">at3center.net</a>.`}</dd></dl></div>`;
+  cards+=`<div class="card"><p class="eyebrow">Assistive technology program: loans, demonstrations, reuse, and financing</p><h3 style="margin-top:.25rem">${esc(s.at)}</h3><dl class="facts"><dt>Website</dt><dd>${s.atUrl?`<a href="${esc(s.atUrl)}" rel="noopener">${esc(s.atUrl.replace(/^https?:\/\/(www\.)?/,""))}</a>`:`Listed under State AT Programs at <a href="${FED.at3.url}" rel="noopener">at3center.net</a>.`}</dd></dl></div>`;
   cards+=`<div class="card"><p class="eyebrow">Federal programs that serve every state</p><dl class="facts"><dt>${esc(FED.nls.name)}</dt><dd><a href="${FED.nls.url}" rel="noopener">loc.gov/nls</a>, ${esc(FED.nls.phone)}. Choose Find your library for the ${esc(s.n)} network library.</dd>${f.deafblind?`<dt>${esc(FED.icc.name)}</dt><dd><a href="${FED.icc.url}" rel="noopener">icanconnect.org</a>, ${esc(FED.icc.phone)}</dd>`:""}${f.veteran?`<dt>${esc(FED.va.name)}</dt><dd><a href="${FED.va.url}" rel="noopener">prosthetics.va.gov/blindrehab</a>, ${esc(FED.va.phone)}. Ask your VA medical center for the VIST coordinator.</dd>`:""}</dl></div>`;
   $("agencyCards").innerHTML=cards;
 
@@ -567,7 +567,7 @@ function render(f){
   $("resetDocs").onclick=()=>{store("bdp-docs-"+s.c,{});$("docList").querySelectorAll("input").forEach(cb=>cb.checked=false);updateProgress();announce("All checklist checks cleared.")};
 
   // Steps
-  $("stepsIntro").textContent=`Each program has its own sequence. The ${PATHWAYS[order[0]].name} steps are open; the others expand.`;
+  $("stepsIntro").textContent=`Start with the steps for ${PATHWAYS[order[0]].name}, shown below. Open another program’s section to read its steps. Unless a legal deadline is cited, the times are estimates; ask the program what to expect.`;
   $("stepsArea").innerHTML=order.map((k,i)=>{const p=PATHWAYS[k];const steps=p.steps(s).map((st,n)=>`<li><span class="num" aria-hidden="true">${n+1}</span><div><span class="sr-only">Step ${n+1}. </span><span class="when">${esc(st.when)}</span><h4 style="margin-top:.1rem">${esc(st.t)}</h4><p style="margin-top:.25rem">${esc(st.d)}</p></div></li>`).join("");
     return `<details ${i===0?"open":""}><summary>${esc(p.name)}</summary><div><ol class="steps" role="list">${steps}</ol></div></details>`}).join("");
 
@@ -581,14 +581,14 @@ I would like to apply for ${f.sit==="older"?"the Older Individuals who are Blind
 
 Can you schedule an intake appointment for me? Please tell me which documents to bring and send the application in [braille / large print / an accessible electronic file].
 
-${f.ssa?"I receive [SSI / SSDI], so I understand I am presumed eligible.\n\n":""}Also, please give me the contact information for the Client Assistance Program.
+${f.ssa?"I receive [SSI / SSDI]. If I am applying for VR and intend to work, I understand that VR’s presumption of eligibility may apply. Please tell me what you need to confirm.\n\n":""}Also, please give me the contact information for the Client Assistance Program.
 
 Thank you. My phone number is [number] and my email is [email].`;
 
   $("eyeScript").textContent=
 `Dear Dr. [name],
 
-I am applying for ${f.sit==="older"?"independent living services":"vocational rehabilitation services"} with ${agencyShort} to obtain a refreshable braille display. They require an eye report from the last 12 months.
+I am applying for ${f.sit==="older"?"independent living services":"vocational rehabilitation services"} with ${agencyShort} to obtain a refreshable braille display. Please prepare a recent eye report; I will confirm the program’s requirements before you send it.
 
 Please send a report to [agency fax / email / address] and a copy to me that includes:
 - Diagnosis and prognosis
@@ -634,7 +634,7 @@ On [date] I [applied for services / requested a refreshable braille display]. [C
 
 A braille display is rehabilitation technology necessary for my employment goal of [goal]. Rehabilitation technology is exempt from the comparable benefits search under 34 CFR 361.53(b).
 
-Please respond in writing within 10 business days. I am also contacting the Client Assistance Program. If the matter is not resolved, I request mediation and an impartial due process hearing under 34 CFR 361.57.
+Please respond in writing within 10 business days. This is my requested response time, not a statutory deadline. I am also contacting the Client Assistance Program. If the matter is not resolved, I request mediation and an impartial due process hearing under 34 CFR 361.57.
 
 Sincerely,
 [your name], [phone], [email]`;
@@ -646,7 +646,7 @@ Sincerely,
 function updateProgress(){
   const boxes=[...$("docList").querySelectorAll("input")];
   const done=boxes.filter(b=>b.checked).length;
-  $("docProgress").textContent=`${done} of ${boxes.length} papers gathered.`;
+  $("docProgress").textContent=`${done} of ${boxes.length} documents gathered.`;
 }
 
 // ----- Deadlines -----
@@ -671,7 +671,7 @@ function updateDeadlines(save=true){
   if(!v){out.textContent="Enter a date above to see your deadlines.";return}
   const fmt=(x)=>x.toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
   const add=(n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
-  out.innerHTML=`<dl class="facts"><dt>Application signed</dt><dd>${fmt(d)}</dd><dt>Eligibility decision due</dt><dd>${fmt(add(60))} (60 days, 34 CFR 361.41)</dd><dt>IPE due at the latest</dt><dd>${fmt(add(150))} (90 days after an eligibility decision made on day 60, 34 CFR 361.45)</dd><dt>Reasonable time to ask about status</dt><dd>${fmt(add(30))}. A polite written check-in at 30 days keeps your file moving.</dd></dl>`;
+  out.innerHTML=`<dl class="facts"><dt>Application signed</dt><dd>${fmt(d)}</dd><dt>Eligibility decision due</dt><dd>${fmt(add(60))} (60 days, 34 CFR 361.41)</dd><dt>IPE due if eligibility is decided on day 60</dt><dd>${fmt(add(150))} (90 days after an eligibility decision made on day 60, 34 CFR 361.45)</dd><dt>Suggested check-in (not a legal deadline)</dt><dd>${fmt(add(30))}. You can ask for a written status update at 30 days. Agreed extensions can change the deadlines above.</dd></dl>`;
 }
 $("appDate").max=localISO(new Date());
 $("appDate").addEventListener("change",()=>updateDeadlines());
@@ -700,7 +700,7 @@ $("controls").addEventListener("change",()=>{
   validateState();
   // Hide stale results until explicit submission.
   $("results").hidden=true;
-  $("status").textContent="Choices changed. Select 'Show my plan' to update the results.";
+  $("status").textContent="Your choices changed. Select 'Show my plan' to see the updated plan.";
 });
 document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",(e)=>copyText($(b.dataset.copy).textContent,e.currentTarget)));
 
@@ -734,7 +734,7 @@ window.addEventListener("hashchange",()=>{
   if(STATES.find(s=>s.c.toLowerCase()===h)){
     sel.value=h;
     $("results").hidden=true;
-    $("status").textContent="Choices changed. Select 'Show my plan' to update the results.";
+    $("status").textContent="Your choices changed. Select 'Show my plan' to see the updated plan.";
   }
 });
 boot();

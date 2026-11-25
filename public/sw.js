@@ -2,7 +2,7 @@
 
 // Root hosting only. Bump VERSION whenever any shell asset changes.
 // No skipWaiting: keep an open guide paired with its existing worker/assets.
-const VERSION = 'v7';
+const VERSION = 'v9';
 const CACHE_PREFIX = 'braille-pathfinder-shell-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 const SHELL = '/index.html';
@@ -11,8 +11,8 @@ const ASSETS = [
   '/fonts/PublicSans-Regular.woff2', '/fonts/PublicSans-Bold.woff2',
   '/fonts/PublicSans-Italic.woff2', '/fonts/PublicSans-BoldItalic.woff2',
   SHELL, '/app-enhancements.js', '/app-enhancements.css', OFFLINE,
-  '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png',
-  '/icons/maskable-512.png'
+  '/manifest.webmanifest', '/icons/violet-icon-192.png', '/icons/violet-icon-512.png',
+  '/icons/violet-maskable-512.png'
 ];
 const ASSET_PATHS = new Set(ASSETS);
 
@@ -111,7 +111,7 @@ self.addEventListener('push', event => {
   const url = safeDestination(payload && payload.url);
   event.waitUntil(self.registration.showNotification('Braille Display Pathfinder', {
     body: 'Open the guide when you’re ready.',
-    icon: '/icons/icon-192.png',
+    icon: '/icons/violet-icon-192.png',
     tag: 'braille-pathfinder-reminder',
     data: { url },
     renotify: false

@@ -28,7 +28,7 @@ State, application dates and checklists remain in this browser. General update n
 
 ## PWA and offline use
 
-On HTTPS (or localhost), visit once and wait for “Offline guide is ready.” The guide, scripts, icons and manifest are cached. Cached guidance remains usable offline, including locally saved form/checklist data. External agency websites and notifications still require a connection; Google-hosted fonts fall back to system fonts offline. Netlify Function responses are never cached. An install button appears when the browser exposes an install prompt; otherwise use browser Install/Add to Home Screen. iOS push requires a Home Screen web app and supported OS/browser. Automated tests do not prove OS-level installation or delivery.
+On HTTPS (or localhost), visit once and wait for “Your offline guide is ready.” The guide, scripts, icons and manifest are cached. Cached guidance remains usable offline, including locally saved form/checklist data. External agency websites and notifications still require a connection. The bundled Public Sans fonts are cached for offline use. Netlify Function responses are never cached. An install button appears when the browser exposes an install prompt; otherwise use browser Install/Add to Home Screen. iOS push requires a Home Screen web app and supported OS/browser. Automated tests do not prove OS-level installation or delivery.
 
 When releasing shell changes, bump `VERSION` in `public/sw.js`. A waiting worker activates after old controlled tabs close. This intentionally avoids replacing an open guide mid-session.
 
@@ -57,3 +57,13 @@ The browser suite uses Chromium, axe WCAG A/AA rules, real keyboard focus, state
 ## Keep funding data current
 
 Agency information was supplied by the original repository. The original page states a November 25, 2026 review date; this implementation does not independently validate all agency contacts or legal claims. Verify against the federal RSA state directory and AT3 Center before relying on details. Edit `src/index.html`, then rebuild.
+
+## Export all website text
+
+After building, run `node scripts/export-all-text.mjs /absolute/path/all-text.md`.
+The export includes static and accessibility text, all 51 jurisdictions, all seven
+programs and workflows, all 22 checklist items, all 32 form combinations, letter
+templates, status/error variants, install metadata, and offline/notification copy.
+Identical conditional blocks are included once. Example-state and calculated-date
+substitutions are explained. The script checks every state contact field, document
+explanation, and program description against the output before writing it.

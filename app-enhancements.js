@@ -4,12 +4,12 @@
   const section = document.createElement('section');
   section.id = 'appTools';
   section.setAttribute('aria-labelledby', 'appToolsHeading');
-  section.innerHTML = `<h2 id="appToolsHeading">Use this guide offline and get updates</h2>
-    <p id="offlineStatus" role="status">Offline support requires HTTPS or localhost.</p>
+  section.innerHTML = `<h2 id="appToolsHeading">Save the guide offline and choose updates</h2>
+    <p id="offlineStatus" role="status">Offline use needs a secure connection (HTTPS) or localhost.</p>
     <button type="button" id="installApp" hidden>Install this guide</button>
-    <p>You can also use your browser’s Install or Add to Home Screen option. On iPhone or iPad, add this guide to your Home Screen first to use notifications.</p>
+    <p>To keep the guide on your device, use your browser’s Install or Add to Home Screen option. On iPhone or iPad, you must add it to your Home Screen before enabling notifications.</p>
     <h3>Optional guide updates</h3>
-    <p id="pushPrivacy">Notifications are general guide updates, not automatic deadline reminders. Only your browser’s push subscription is sent to this site and its push delivery provider. Your state, checklist and dates stay on your device. Updates may appear on your lock screen. You can turn them off here or in browser settings.</p>
+    <p id="pushPrivacy">These notifications are general updates about the guide, not reminders for your application deadlines. If you enable them, this site and its push delivery provider receive your browser’s push subscription so they can send updates. Your state, checklist, and dates stay on your device. Notifications may appear on your lock screen. Turn them off here or in your browser settings.</p>
     <div class="toolbar"><button type="button" id="enablePush" aria-describedby="pushPrivacy" disabled>Enable update notifications</button>
     <button type="button" id="renewPush" disabled>Renew update notifications for 90 days</button>
     <button type="button" id="disablePush" disabled>Turn off update notifications</button></div>
@@ -57,8 +57,8 @@
   window.addEventListener('appinstalled', () => { $('installApp').hidden = true; });
   const offlineMessage = () => {
     $('offlineStatus').textContent = navigator.serviceWorker?.controller
-      ? (navigator.onLine ? 'Offline guide is ready. Previously loaded guidance remains available without a connection.' : 'You are offline. Saved guide available; external agency links and notifications need a connection.')
-      : 'Preparing offline guide. Keep this page open until setup completes.';
+      ? (navigator.onLine ? 'Your offline guide is ready. You can read the saved guide without an internet connection.' : 'You are offline. You can use the saved guide, but agency websites and notifications need an internet connection.')
+      : 'Saving the guide for offline use. Keep this page open until it is ready.';
   };
   window.addEventListener('online', offlineMessage); window.addEventListener('offline', offlineMessage);
   $('enablePush').addEventListener('click', async () => {
@@ -76,7 +76,7 @@
       $('pushStatus').textContent = 'Update notifications enabled. No personal plan details were sent.';
     } catch (error) {
       if (subscription) await subscription.unsubscribe().catch(() => {});
-      $('pushStatus').textContent = 'Could not enable notifications. Check your connection and site setup, then try again.';
+      $('pushStatus').textContent = 'Notifications could not be enabled. Check your internet connection and try again. If this continues, the site may not be set up to send updates.';
     } finally { busy = false; await refresh(); }
   });
   $('renewPush').addEventListener('click', async () => {
@@ -86,7 +86,7 @@
       const record = await api('push-subscriptions', {action:'register', subscription:subscription.toJSON(), removalToken:ownershipToken()});
       localStorage.setItem(recordKey, JSON.stringify(record));
       $('pushStatus').textContent = 'Update notifications renewed for up to 90 days.';
-    } catch { $('pushStatus').textContent = 'Could not renew. Check your connection and try again. If ownership storage was cleared, turn notifications off and enable again.'; }
+    } catch { $('pushStatus').textContent = 'Notifications could not be renewed. Check your connection and try again. If you cleared this site’s saved browser data, turn notifications off here, then enable them again.'; }
     finally { busy = false; await refresh(); }
   });
   $('disablePush').addEventListener('click', async () => {
@@ -105,19 +105,19 @@
     } catch {
       const subscription = await registration.pushManager.getSubscription().catch(() => null);
       if (subscription) await subscription.unsubscribe().catch(() => {});
-      $('pushStatus').textContent = 'Local notifications turned off where supported, but server removal could not be confirmed. A saved record may remain until expiry. Block notifications in browser settings to ensure delivery stops.';
+      $('pushStatus').textContent = 'We tried to turn off notifications in this browser, but could not confirm removal from the server. A subscription record may remain until it expires. Block this site’s notifications in browser settings to make sure delivery stops.';
     } finally { busy = false; await refresh(); }
   });
   (async () => {
     if (!isSecureContext || !('serviceWorker' in navigator)) {
-      $('pushStatus').textContent = 'This browser needs HTTPS and service worker support for offline use and notifications.'; return;
+      $('pushStatus').textContent = 'Offline use and notifications need a secure connection (HTTPS) and a browser that supports service workers. You can still read the online guide.'; return;
     }
     try {
       registration = await navigator.serviceWorker.register('/sw.js');
       await navigator.serviceWorker.ready;
       navigator.serviceWorker.addEventListener('controllerchange', offlineMessage);
       offlineMessage();
-      if (!supported) { $('pushStatus').textContent = 'Push notifications are not supported here. The guide still works without them.'; return; }
+      if (!supported) { $('pushStatus').textContent = 'This browser does not support push notifications here. You can still use the guide.'; return; }
       const subscription = await refresh();
       if (subscription) $('pushStatus').textContent = 'This browser has update notifications enabled.';
       try {
@@ -128,9 +128,9 @@
           ? 'Notifications are blocked in browser settings. The guide still works normally.'
           : 'Notifications are off. Enable them only if you want general guide updates.';
       } catch {
-        if (!subscription) $('pushStatus').textContent = 'Notifications are not configured on this host. Offline guidance still works.';
+        if (!subscription) $('pushStatus').textContent = 'This site is not set up to send notifications. You can still use the offline guide.';
       }
       await refresh();
-    } catch { $('offlineStatus').textContent = 'Offline setup failed. The online guide still works. Reload to retry.'; $('pushStatus').textContent = 'Notifications unavailable until offline setup succeeds.'; }
+    } catch { $('offlineStatus').textContent = 'The guide could not be saved for offline use. You can still use it online. Reload the page to try again.'; $('pushStatus').textContent = 'Notifications are unavailable until the offline setup is complete.'; }
   })();
 })();
