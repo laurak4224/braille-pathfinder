@@ -116,7 +116,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   <div class="toolbar" role="group" aria-label="Text size">
     <button type="button" id="textSmaller" class="ghost" aria-label="Smaller text">A&minus;</button>
     <button type="button" id="textLarger" class="ghost" aria-label="Larger text">A+</button>
-    <span id="textSizeNote" class="hint" style="margin:0" role="status" aria-live="polite">Text size: normal</span>
+    <span id="textSizeNote" class="hint" style="margin:0" role="status" aria-live="polite">Text size: default</span>
   </div>
 </header>
 
@@ -414,7 +414,7 @@ function copyText(text,btn){
 
 // ----- Text size -----
 let textStep=load("bdp-textstep",0);
-function applyText(){const sizes=[112.5,131,150,175];textStep=Math.max(0,Math.min(3,textStep));document.documentElement.style.fontSize=sizes[textStep]+"%";$("textSizeNote").textContent="Text size: "+["normal","large","larger","largest"][textStep];store("bdp-textstep",textStep)}
+function applyText(){const sizes=[112.5,131,150,175];textStep=Math.max(0,Math.min(3,textStep));document.documentElement.style.fontSize=sizes[textStep]+"%";$("textSizeNote").textContent="Text size: "+["default","large","larger","largest"][textStep];store("bdp-textstep",textStep)}
 $("textLarger").addEventListener("click",()=>{textStep++;applyText()});
 $("textSmaller").addEventListener("click",()=>{textStep--;applyText()});
 applyText();
