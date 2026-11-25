@@ -8,7 +8,7 @@
   --surface:#ffffff;
   --fg:#15201e;
   --muted:#4b5a57;
-  --line:#c9d1ce;
+  --line:#7b8984;
   --accent:#0b5d5a;    /* deep teal: 7.5:1 on bg */
   --accent-fg:#ffffff;
   --accent-soft:#e1efed;
@@ -20,13 +20,13 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#111716;--surface:#1a2221;--fg:#eef3f1;--muted:#aebbb7;--line:#3a4744;
+    --bg:#111716;--surface:#1a2221;--fg:#eef3f1;--muted:#aebbb7;--line:#788b84;
     --accent:#7fd3c9;--accent-fg:#0b1a18;--accent-soft:#163533;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#ffb070;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#111716;--surface:#1a2221;--fg:#eef3f1;--muted:#aebbb7;--line:#3a4744;
+  --bg:#111716;--surface:#1a2221;--fg:#eef3f1;--muted:#aebbb7;--line:#788b84;
   --accent:#7fd3c9;--accent-fg:#0b1a18;--accent-soft:#163533;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#ffb070;
   color-scheme:dark;
 }
@@ -40,6 +40,14 @@ h2{font-size:1.5rem;margin-top:2.5rem;padding-top:1.25rem;border-top:3px solid v
 h3{font-size:1.2rem;margin-top:1.5rem}
 h4{font-size:1.05rem;margin-top:1rem}
 p,li{max-width:65ch}
+.wrap, .toolbar>*{min-width:0}
+body{margin:0}
+.wrap{overflow-wrap:anywhere}
+button,.btn,select,input{max-width:100%}
+[tabindex="-1"]:focus{outline:3px solid var(--focus);outline-offset:3px}
+[aria-disabled="true"]{cursor:default}
+.error{font-weight:700;margin:.5rem 0}
+[aria-invalid="true"]{border:3px solid var(--warn-line)}
 p{margin:.75rem 0}
 a{color:var(--accent);text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:.09em}
 a:hover{text-decoration-thickness:.18em}
@@ -80,7 +88,7 @@ ul.docs li{margin:0}
 ul.docs .choice{grid-template-columns:1.8rem 1fr}
 ul.docs .why{display:block;color:var(--muted);font-size:.95rem}
 .progress{font-weight:700;margin-top:.75rem}
-pre.script{white-space:pre-wrap;font-family:var(--font);background:var(--accent-soft);border-radius:6px;padding:1rem;margin:.75rem 0 0;overflow-x:auto;max-width:100%}
+pre.script{overflow-wrap:anywhere;white-space:pre-wrap;font-family:var(--font);background:var(--accent-soft);border-radius:6px;padding:1rem;margin:.75rem 0 0;overflow-x:auto;max-width:100%}
 details{margin-top:.75rem;border:2px solid var(--line);border-radius:8px;background:var(--surface)}
 summary{cursor:pointer;font-weight:700;padding:.9rem 1.1rem;min-height:44px;list-style-position:inside}
 summary:hover{text-decoration:underline}
@@ -98,6 +106,17 @@ th{font-size:.9rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mut
 .tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:2px solid var(--accent);color:var(--accent);padding:.05rem .5rem;border-radius:999px}
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
 @media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+@media (max-width:360px){
+  h1{font-size:1.75rem}
+  form.controls,.card,.pathway{padding:.8rem}
+  ol.steps>li{grid-template-columns:1.6rem 1fr;gap:.4rem}
+  .toolbar{align-items:stretch}
+}
+@media (forced-colors: active){
+  :focus-visible,[tabindex="-1"]:focus{outline-color:Highlight}
+  .choice:has(:checked){border-color:Highlight}
+}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -107,18 +126,22 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   <h1>Braille Display Pathfinder</h1>
   <p class="lede">Choose your state and your situation. You get the agency to call, the exact papers to gather, the steps in order, and the deadlines the law gives the agency.</p>
   <div class="toolbar" role="group" aria-label="Text size">
-    <button type="button" id="textSmaller" class="ghost" aria-label="Smaller text">A&minus;</button>
-    <button type="button" id="textLarger" class="ghost" aria-label="Larger text">A+</button>
+    <button type="button" id="textSmaller" class="ghost">Smaller text</button>
+    <button type="button" id="textLarger" class="ghost">Larger text</button>
     <span id="textSizeNote" class="hint" style="margin:0" role="status" aria-live="polite">Text size: default</span>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
-<form class="controls" id="controls" aria-labelledby="controlsHeading">
+<noscript><p class="notice">This planner needs JavaScript to choose your state and calculate your plan. You can still find your state agency in the <a href="https://rsa.ed.gov/about/states">RSA state directory</a> or ask your local library for help accessing braille funding services.</p></noscript>
+<p id="storageNote" class="notice" role="status" aria-live="polite" hidden></p>
+<p id="actionStatus" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+<form class="controls" id="controls" aria-labelledby="controlsHeading" novalidate>
   <h2 id="controlsHeading" style="border:0;padding:0;margin:0;font-size:1.3rem">Tell us about you</h2>
   <div>
-    <label for="state">Your state</label>
-    <select id="state" name="state"><option value="">Choose a state</option></select>
+    <label for="state">Your state (required)</label>
+    <select id="state" name="state" required aria-describedby="stateError"><option value="">Choose a state</option></select>
+    <p id="stateError" class="error" hidden></p>
   </div>
   <fieldset>
     <legend>Your main situation <span class="hint">Pick the one that fits best. It changes which program pays and which papers you need.</span></legend>
@@ -160,7 +183,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 
   <section aria-labelledby="hDocs">
     <h2 id="hDocs">Papers to gather</h2>
-    <p>Check each item off as you collect it. Your checks are saved on this device only. Ask every office for forms in your preferred format: braille, large print, or an accessible electronic file. They are required to provide them under the Americans with Disabilities Act and Section 504.</p>
+    <p>Check each item off as you collect it. Your checks are saved on this device only when browser storage is available. If saving is blocked, they last only while this page stays open. Ask every office for forms in your preferred format: braille, large print, or an accessible electronic file. They are required to provide them under the Americans with Disabilities Act and Section 504.</p>
     <p class="progress" id="docProgress" role="status" aria-live="polite"></p>
     <ul class="docs" id="docList" role="list"></ul>
     <div class="toolbar">
@@ -179,7 +202,9 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     <h2 id="hDeadlines">Deadline tracker</h2>
     <p>Federal rules give the vocational rehabilitation agency a clock. Enter the date you signed your application and this works out the dates you can hold them to.</p>
     <label for="appDate">Date you signed the VR application</label>
-    <input type="date" id="appDate">
+    <input type="date" id="appDate" aria-describedby="dateHint dateError">
+    <p id="dateHint" class="hint">Use the date you already signed, not a future date. Clear the field to remove the saved date.</p>
+    <p id="dateError" class="error" hidden></p>
     <div id="deadlineOut" class="card" role="status" aria-live="polite"><p style="margin:0">Enter a date above to see your deadlines.</p></div>
   </section>
 
@@ -230,7 +255,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
       <p>Every state has a Client Assistance Program (CAP), funded by the federal government and independent of the VR agency. CAP staff explain your rights, help you prepare for meetings, and can represent you in appeals at no cost. Ask the VR agency for the CAP contact; they must give it to you at application and whenever a service is denied.</p>
     </div></details>
     <details><summary>Typical braille display prices, for planning</summary><div>
-      <div class="tablewrap"><table>
+      <div class="tablewrap" role="region" aria-label="Braille display price comparison" tabindex="0"><table>
         <caption class="sr-only">Approximate price ranges by braille display size</caption>
         <thead><tr><th scope="col">Device size</th><th scope="col">Typical price range</th><th scope="col">Common uses</th></tr></thead>
         <tbody>
@@ -397,19 +422,70 @@ const PATHWAYS = {
 // ----- Helpers -----
 const $ = (id)=>document.getElementById(id);
 const esc = (s)=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function store(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function load(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}}
-function copyText(text,btn){
-  const done=()=>{const old=btn.textContent;btn.setAttribute("data-done",old.replace(/^Copy /,"Copied: "));btn.textContent="Copied";setTimeout(()=>btn.textContent=old,2000);$("status").textContent=btn.textContent==="Copied"?btn.getAttribute("data-done")||"Copied to clipboard.":"Copied to clipboard."};
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>fallback())}else fallback();
-  function fallback(){const ta=document.createElement("textarea");ta.value=text;ta.setAttribute("aria-hidden","true");document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch(e){$("status").textContent="Copy failed. Select the text and copy it yourself."}document.body.removeChild(ta)}
+// Keep a session copy if browser storage is blocked, full, or malformed.
+const sessionValues = new Map();
+function storageWarning(){
+  const note=$("storageNote");
+  note.hidden=false;
+  note.textContent="Browser storage is unavailable or contains damaged data. Your plan still works, but changes may not survive closing or reloading this page.";
+}
+function store(k,v){
+  sessionValues.set(k,v);
+  try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){storageWarning();return false}
+}
+function load(k,d){
+  if(sessionValues.has(k)) return sessionValues.get(k);
+  try{
+    const raw=localStorage.getItem(k);
+    if(raw===null) return d;
+    const value=JSON.parse(raw);
+    sessionValues.set(k,value);
+    return value;
+  }catch(e){storageWarning();return d}
+}
+function record(value){return value!==null&&typeof value==="object"&&!Array.isArray(value)}
+function savedChecks(key){
+  const value=load(key,{});
+  if(!record(value)) return {};
+  return Object.fromEntries(DOCS.filter(d=>value[d.id]===true).map(d=>[d.id,true]));
+}
+function announce(message){
+  // A fresh node allows the same action to be announced on consecutive uses.
+  $("actionStatus").replaceChildren(document.createTextNode(message));
+}
+async function copyText(text,btn){
+  let copied=false;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    try{await navigator.clipboard.writeText(text);copied=true}catch(e){}
+  }
+  if(!copied){
+    const previous=document.activeElement;
+    const ta=document.createElement("textarea");
+    ta.value=text;
+    ta.setAttribute("aria-label","Text to copy");
+    ta.style.cssText="position:fixed;left:0;top:0;width:1px;height:1px;opacity:0";
+    document.body.appendChild(ta);
+    try{ta.focus({preventScroll:true});ta.select();copied=document.execCommand("copy")===true}catch(e){}
+    finally{ta.remove();if(previous&&previous.isConnected)previous.focus({preventScroll:true})}
+  }
+  announce(copied ? btn.textContent.replace(/^Copy /,"Copied ")+" to clipboard." : "Copy failed. Select the script or checklist text and copy it yourself.");
 }
 
 // ----- Text size -----
-let textStep=load("bdp-textstep",0);
-function applyText(){const sizes=[112.5,131,150,175];textStep=Math.max(0,Math.min(3,textStep));document.documentElement.style.fontSize=sizes[textStep]+"%";$("textSizeNote").textContent="Text size: "+["default","large","larger","largest"][textStep];store("bdp-textstep",textStep)}
-$("textLarger").addEventListener("click",()=>{textStep++;applyText()});
-$("textSmaller").addEventListener("click",()=>{textStep--;applyText()});
+const storedTextStep=load("bdp-textstep",0);
+let textStep=Number.isInteger(storedTextStep)&&storedTextStep>=0&&storedTextStep<=3?storedTextStep:0;
+function applyText(){
+  const sizes=[112.5,131,150,175];
+  textStep=Math.max(0,Math.min(3,textStep));
+  document.documentElement.style.fontSize=sizes[textStep]+"%";
+  $("textSizeNote").textContent="Text size: "+["default","large","larger","largest"][textStep];
+  // aria-disabled keeps keyboard focus on the button when the limit is reached.
+  $("textSmaller").setAttribute("aria-disabled",String(textStep===0));
+  $("textLarger").setAttribute("aria-disabled",String(textStep===3));
+  store("bdp-textstep",textStep);
+}
+$("textLarger").addEventListener("click",()=>{if(textStep<3){textStep++;applyText()}});
+$("textSmaller").addEventListener("click",()=>{if(textStep>0){textStep--;applyText()}});
 applyText();
 
 // ----- State select -----
@@ -419,7 +495,7 @@ STATES.forEach(s=>{const o=document.createElement("option");o.value=s.c.toLowerC
 function readForm(){
   const code=sel.value;
   const st=STATES.find(s=>s.c.toLowerCase()===code);
-  const sit=document.querySelector('input[name="situation"]:checked').value;
+  const sit=document.querySelector('input[name="situation"]:checked')?.value||"work";
   return {st,sit,veteran:$("opt-veteran").checked,deafblind:$("opt-deafblind").checked,ssa:$("opt-ssa").checked};
 }
 
@@ -469,12 +545,12 @@ function render(f){
     if(d.sit&&d.sit!==f.sit) return false;
     return true;
   });
-  const checked=load("bdp-docs-"+s.c,{});
-  $("docList").innerHTML=docs.map(d=>`<li><label class="choice"><input type="checkbox" id="doc-${d.id}" data-doc="${d.id}" aria-describedby="why-${d.id}" ${checked[d.id]?"checked":""}><span><strong>${esc(d.t)}</strong><span class="why" id="why-${d.id}">${esc(d.w)}</span></span></label></li>`).join("");
-  $("docList").querySelectorAll("input").forEach(cb=>cb.addEventListener("change",()=>{const c=load("bdp-docs-"+s.c,{});c[cb.dataset.doc]=cb.checked;store("bdp-docs-"+s.c,c);updateProgress()}));
+  const checked=savedChecks("bdp-docs-"+s.c);
+  $("docList").innerHTML=docs.map(d=>`<li><label class="choice"><input type="checkbox" id="doc-${d.id}" data-doc="${d.id}" aria-labelledby="label-${d.id}" aria-describedby="why-${d.id}" ${checked[d.id]===true?"checked":""}><span><strong id="label-${d.id}">${esc(d.t)}</strong><span class="why" id="why-${d.id}">${esc(d.w)}</span></span></label></li>`).join("");
+  $("docList").querySelectorAll("input").forEach(cb=>cb.addEventListener("change",()=>{const c=savedChecks("bdp-docs-"+s.c);c[cb.dataset.doc]=cb.checked;store("bdp-docs-"+s.c,c);updateProgress()}));
   updateProgress();
   $("copyDocs").onclick=(e)=>{const lines=[`Braille display paperwork checklist for ${s.n} (${sitWords})`,""];docs.forEach(d=>{const c=$("doc-"+d.id).checked;lines.push(`[${c?"x":" "}] ${d.t}`);lines.push(`    ${d.w}`)});lines.push("",`Agency: ${s.agency}, ${s.dept}. ${s.url}${s.phone?" "+s.phone:""}`);copyText(lines.join("\n"),e.currentTarget)};
-  $("resetDocs").onclick=()=>{store("bdp-docs-"+s.c,{});$("docList").querySelectorAll("input").forEach(cb=>cb.checked=false);updateProgress();$("status").textContent="All checks cleared."};
+  $("resetDocs").onclick=()=>{store("bdp-docs-"+s.c,{});$("docList").querySelectorAll("input").forEach(cb=>cb.checked=false);updateProgress();announce("All checklist checks cleared.")};
 
   // Steps
   $("stepsIntro").textContent=`Each program has its own sequence. The ${PATHWAYS[order[0]].name} steps are open; the others expand.`;
@@ -560,47 +636,83 @@ function updateProgress(){
 }
 
 // ----- Deadlines -----
-$("appDate").addEventListener("change",()=>{
-  const v=$("appDate").value; const out=$("deadlineOut");
-  if(!v){out.innerHTML='<p style="margin:0">Enter a date above to see your deadlines.</p>';return}
-  const d=new Date(v+"T00:00:00");
+function localISO(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function parsedDate(value){
+  if(typeof value!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const [y,m,d]=value.split("-").map(Number);
+  if(y<1||y>9998) return null;
+  const date=new Date(0);date.setFullYear(y,m-1,d);date.setHours(12,0,0,0);
+  return localISO(date)===value?date:null;
+}
+function updateDeadlines(save=true){
+  const input=$("appDate"),v=input.value,out=$("deadlineOut");
+  input.max=localISO(new Date());
+  const d=parsedDate(v);
+  const invalid=input.validity.badInput||(v&&(!d||v>input.max));
+  input.setAttribute("aria-invalid",String(!!invalid));
+  $("dateError").hidden=!invalid;
+  $("dateError").textContent=invalid?"Enter a real application date on or before today.":"";
+  if(invalid){out.textContent="Deadlines cannot be calculated until the application date is corrected.";return}
+  if(save) store("bdp-appdate",v);
+  if(!v){out.textContent="Enter a date above to see your deadlines.";return}
   const fmt=(x)=>x.toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
   const add=(n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
   out.innerHTML=`<dl class="facts"><dt>Application signed</dt><dd>${fmt(d)}</dd><dt>Eligibility decision due</dt><dd>${fmt(add(60))} (60 days, 34 CFR 361.41)</dd><dt>IPE due at the latest</dt><dd>${fmt(add(150))} (90 days after an eligibility decision made on day 60, 34 CFR 361.45)</dd><dt>Reasonable time to ask about status</dt><dd>${fmt(add(30))}. A polite written check-in at 30 days keeps your file moving.</dd></dl>`;
-  store("bdp-appdate",v);
-});
+}
+$("appDate").max=localISO(new Date());
+$("appDate").addEventListener("change",()=>updateDeadlines());
 
 // ----- Form events -----
+function validateState(){
+  const valid=!!STATES.find(s=>s.c.toLowerCase()===sel.value);
+  sel.setAttribute("aria-invalid",String(!valid));
+  $("stateError").hidden=valid;
+  $("stateError").textContent=valid?"":"Choose your state, then select Show my plan.";
+  return valid;
+}
+function saveForm(f){store("bdp-form",{state:sel.value,sit:f.sit,veteran:f.veteran,deafblind:f.deafblind,ssa:f.ssa})}
+function updateHash(){
+  // Sandboxed embeds and file URLs may deny History API changes.
+  try{if(location.hash!=="#"+sel.value)history.replaceState(null,"","#"+sel.value)}catch(e){}
+}
 $("controls").addEventListener("submit",(e)=>{
   e.preventDefault();
+  if(!validateState()){$("status").textContent="Choose your state first.";sel.focus();return}
   const f=readForm();
-  if(!f.st){$("status").textContent="Choose your state first.";sel.focus();return}
-  store("bdp-form",{state:sel.value,sit:f.sit,veteran:f.veteran,deafblind:f.deafblind,ssa:f.ssa});
-  if(location.hash!=="#"+sel.value){history.replaceState(null,"","#"+sel.value)}
-  render(f);
+  saveForm(f);updateHash();render(f);
   $("hPath").focus();
 });
-["change"].forEach(ev=>$("controls").addEventListener(ev,(e)=>{
-  if(e.target.type==="submit")return;
-  const f=readForm();
-  if(f.st&&!$("results").hidden){store("bdp-form",{state:sel.value,sit:f.sit,veteran:f.veteran,deafblind:f.deafblind,ssa:f.ssa});if(location.hash!=="#"+sel.value){history.replaceState(null,"","#"+sel.value)}render(f)}
-}));
+$("controls").addEventListener("change",()=>{
+  validateState();
+  // Keep the existing plan stable while users choose radio/checkbox options.
+  // Only explicit submission replaces results and moves focus.
+  $("status").textContent="Choices changed. Select Show my plan to update the results.";
+});
 document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",(e)=>copyText($(b.dataset.copy).textContent,e.currentTarget)));
 
-// ----- External links: say so for screen readers -----
-function markExternal(root){root.querySelectorAll('a[href^="http"]').forEach(a=>{if(!a.querySelector(".ext")){const sp=document.createElement("span");sp.className="sr-only ext";sp.textContent=" (opens in a new tab)";a.appendChild(sp)}})}
+// Only announce a new tab when the link actually opens one.
+function markExternal(root){root.querySelectorAll('a[href^="http"]').forEach(a=>{
+  if(a.target==="_blank"&&!a.querySelector(".ext")){
+    const sp=document.createElement("span");sp.className="sr-only ext";sp.textContent=" (opens in a new tab)";a.appendChild(sp);
+    a.relList.add("noopener");
+  }
+})}
 markExternal(document);
 // ----- Boot: hash, saved form, default example -----
 function boot(){
-  const saved=load("bdp-form",null);
+  const candidate=load("bdp-form",null);
+  const saved=record(candidate)?candidate:null;
   const hashState=(location.hash||"").replace("#","").toLowerCase();
   const fromHash=STATES.find(s=>s.c.toLowerCase()===hashState);
   if(saved){
-    document.querySelector(`input[name="situation"][value="${saved.sit}"]`)?.click();
-    $("opt-veteran").checked=!!saved.veteran;$("opt-deafblind").checked=!!saved.deafblind;$("opt-ssa").checked=!!saved.ssa;
+    const radio=[...document.querySelectorAll('input[name="situation"]')].find(r=>r.value===saved.sit);
+    if(radio) radio.checked=true;
+    $("opt-veteran").checked=saved.veteran===true;$("opt-deafblind").checked=saved.deafblind===true;$("opt-ssa").checked=saved.ssa===true;
   }
-  if(fromHash) sel.value=fromHash.c.toLowerCase(); else if(saved&&saved.state) sel.value=saved.state;
-  const ad=load("bdp-appdate","");if(ad){$("appDate").value=ad;$("appDate").dispatchEvent(new Event("change"))}
+  if(fromHash) sel.value=fromHash.c.toLowerCase(); else if(saved&&STATES.some(s=>s.c.toLowerCase()===saved.state)) sel.value=saved.state;
+  const ad=load("bdp-appdate","");
+  if(parsedDate(ad)&&ad<=localISO(new Date())) $("appDate").value=ad;
+  updateDeadlines(false);
   const f=readForm();
   if(f.st){render(f)}
   else {
