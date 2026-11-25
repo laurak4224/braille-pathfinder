@@ -2,12 +2,14 @@
 
 // Root hosting only. Bump VERSION whenever any shell asset changes.
 // No skipWaiting: keep an open guide paired with its existing worker/assets.
-const VERSION = 'v3';
+const VERSION = 'v5';
 const CACHE_PREFIX = 'braille-pathfinder-shell-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 const SHELL = '/index.html';
 const OFFLINE = '/offline.html';
 const ASSETS = [
+  '/fonts/PublicSans-Regular.woff2', '/fonts/PublicSans-Bold.woff2',
+  '/fonts/PublicSans-Italic.woff2', '/fonts/PublicSans-BoldItalic.woff2',
   SHELL, '/app-enhancements.js', '/app-enhancements.css', OFFLINE,
   '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png',
   '/icons/maskable-512.png'

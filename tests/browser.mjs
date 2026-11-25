@@ -12,6 +12,7 @@ try {
   await page.goto('http://127.0.0.1:4178');
   await page.waitForFunction(()=>navigator.serviceWorker.controller);
   await page.waitForFunction(()=>document.getElementById('offlineStatus').textContent.includes('ready'));
+  assert.equal(await page.locator('#results').isVisible(),false,'no initial plan');
   await page.keyboard.press('Tab');
   assert.equal(await page.locator(':focus').textContent(), 'Skip to main content');
   await page.keyboard.press('Enter');
@@ -20,12 +21,22 @@ try {
   await page.locator('#go').click();
   assert.equal(await page.locator(':focus').getAttribute('id'),'hPath');
   assert.match(await page.locator('#stateName1').textContent(), /California/);
+  await page.selectOption('#state','ny');
+  assert.equal(await page.locator('#results').isVisible(),false,'changed choices hide previous plan');
+  assert.equal(await page.locator('#status').textContent(),"Choices changed. Select 'Show my plan' to update the results.");
+  await page.selectOption('#state','ca');
+  await page.locator('#go').click();
+  assert.match(await page.locator('#state').evaluate(el=>getComputedStyle(el).fontFamily),/Public Sans/);
+  await page.evaluate(()=>document.fonts.ready);
+  assert.equal(await page.evaluate(()=>document.fonts.check('18px "Public Sans"')),true,'Public Sans loaded');
   await page.locator('#docList input').first().check();
   await page.locator('#appDate').fill('2026-01-01');
   await page.locator('#appDate').dispatchEvent('change');
   assert.match(await page.locator('#deadlineOut').textContent(), /March/);
   await page.reload();
   assert.equal(await page.locator('#state').inputValue(),'ca');
+  assert.equal(await page.locator('#results').isVisible(),false,'reload hides plan');
+  await page.locator('#go').click();
   assert.equal(await page.locator('#docList input').first().isChecked(),true);
   for (const scheme of ['light','dark']) {
     await page.emulateMedia({colorScheme:scheme});
