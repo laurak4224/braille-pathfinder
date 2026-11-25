@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Find braille display funding, accessible checklists, agency contacts and application workflows in every US state.">
-<meta name="theme-color" content="#6b2a63">
+<meta name="theme-color" content="#5426a0">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
@@ -18,30 +18,30 @@
 @font-face{font-family:"Public Sans";font-style:italic;font-weight:700;font-display:swap;src:url("/fonts/PublicSans-BoldItalic.woff2") format("woff2")}
 /* Layout: one calm reading column. Controls first, then the plan as a numbered sequence a screen reader can walk. */
 :root{
-  --bg:#f8f6f7;        /* warm off-white */
+  --bg:#f8f6fc;        /* warm off-white */
   --surface:#ffffff;
-  --fg:#1f1720;
-  --muted:#594d5a;
-  --line:#867a86;
-  --accent:#6b2a63;    /* warm plum purple */
+  --fg:#20182d;
+  --muted:#554c64;
+  --line:#81758e;
+  --accent:#5426a0;    /* warm plum purple */
   --accent-fg:#ffffff;
-  --accent-soft:#f3e5ef;
+  --accent-soft:#eee7fa;
   --warn-soft:#fff3d6;
   --warn-line:#b3760a;
-  --focus:#8e3f8a;
+  --focus:#7040bf;
   --font:"Public Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   font-size:112.5%;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#171217;--surface:#221b22;--fg:#f4eef3;--muted:#c2b5c1;--line:#8d7e8c;
-    --accent:#e5b2dc;--accent-fg:#211320;--accent-soft:#3b2539;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#f0c6ea;
+    --bg:#17121f;--surface:#211b2d;--fg:#f2eef9;--muted:#bfb5cf;--line:#897d9d;
+    --accent:#cbb5ff;--accent-fg:#1b1230;--accent-soft:#302147;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#dfceff;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#171217;--surface:#221b22;--fg:#f4eef3;--muted:#c2b5c1;--line:#8d7e8c;
-  --accent:#e5b2dc;--accent-fg:#211320;--accent-soft:#3b2539;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#f0c6ea;
+  --bg:#17121f;--surface:#211b2d;--fg:#f2eef9;--muted:#bfb5cf;--line:#897d9d;
+  --accent:#cbb5ff;--accent-fg:#1b1230;--accent-soft:#302147;--warn-soft:#3a2d10;--warn-line:#f0b64d;--focus:#dfceff;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -171,7 +171,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     <p id="stateError" class="error" hidden></p>
   </div>
   <fieldset>
-    <legend>Your main situation <span class="hint">Pick the one that fits best. It changes which program pays and which papers you need.</span></legend>
+    <legend>Pick the one that fits best. It changes which program pays and which papers you need.</legend>
     <div class="choices" id="situationChoices">
       <label class="choice"><input type="radio" name="situation" value="work" id="sit-work" checked><span>I am working, or I want to work or get job training (age 16 and up)</span></label>
       <label class="choice"><input type="radio" name="situation" value="student" id="sit-student"><span>I am a student in school or college (through age 21)</span></label>
@@ -180,7 +180,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     </div>
   </fieldset>
   <fieldset>
-    <legend>Also true for me <span class="hint">Check any that apply. Each one opens another funding door.</span></legend>
+    <legend>Check any that apply. Each one opens another funding door.</legend>
     <div class="choices">
       <label class="choice"><input type="checkbox" name="veteran" id="opt-veteran"><span>I am a U.S. military veteran</span></label>
       <label class="choice"><input type="checkbox" name="deafblind" id="opt-deafblind"><span>I also have significant hearing loss</span></label>
